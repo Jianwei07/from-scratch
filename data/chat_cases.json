@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "valid_minimal_request",
+      "request": {
+        "message": "Why is the sky blue?"
+      },
+      "expected_status_code": 200,
+      "expected_body": {
+        "status": "completed",
+        "safety": "safe"
+      }
+    },
+    {
+      "name": "valid_request_with_history",
+      "request": {
+        "message": "What happens next?",
+        "child_age": 9,
+        "history": [
+          {
+            "role": "user",
+            "content": "Tell me about rainbows."
+          },
+          {
+            "role": "assistant",
+            "content": "Rainbows appear when light passes through water."
+          }
+        ]
+      },
+      "expected_status_code": 200,
+      "expected_body": {
+        "status": "completed",
+        "safety": "safe"
+      }
+    },
+    {
+      "name": "blocked_current_message",
+      "request": {
+        "message": "What is a weapon?"
+      },
+      "expected_status_code": 200,
+      "expected_body": {
+        "status": "blocked",
+        "safety": "blocked"
+      }
+    },
+    {
+      "name": "blocked_history_message",
+      "request": {
+        "message": "Continue our conversation.",
+        "history": [
+          {
+            "role": "user",
+            "content": "Tell me about a weapon."
+          }
+        ]
+      },
+      "expected_status_code": 200,
+      "expected_body": {
+        "status": "blocked",
+        "safety": "blocked"
+      }
+    },
+    {
+      "name": "blank_message",
+      "request": {
+        "message": "   "
+      },
+      "expected_status_code": 422
+    },
+    {
+      "name": "age_below_range",
+      "request": {
+        "message": "Hello",
+        "child_age": 3
+      },
+      "expected_status_code": 422
+    },
+    {
+      "name": "history_above_limit",
+      "request": {
+        "message": "Hello",
+        "history": [
+          {"role": "user", "content": "1"},
+          {"role": "assistant", "content": "2"},
+          {"role": "user", "content": "3"},
+          {"role": "assistant", "content": "4"},
+          {"role": "user", "content": "5"},
+          {"role": "assistant", "content": "6"},
+          {"role": "user", "content": "7"},
+          {"role": "assistant", "content": "8"},
+          {"role": "user", "content": "9"},
+          {"role": "assistant", "content": "10"},
+          {"role": "user", "content": "11"}
+        ]
+      },
+      "expected_status_code": 422
+    }
+  ]
+}
