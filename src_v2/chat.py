@@ -1,5 +1,4 @@
 import re
-from uuid import uuid4
 
 from model import ChatRequest, ChatResponse
 

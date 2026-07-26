@@ -14,11 +14,3 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: NonBlank
     blocked: bool = False
-
-class ChatMessage(BaseModel):
-    role: Literal["user", "chatbot"]
-    content: str
-
-class ConvoHistory(BaseModel):
-    conv_id: str
-    history: list[ChatMessage]
