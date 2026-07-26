@@ -2,7 +2,7 @@ import re
 
 from model import ChatRequest, ChatResponse
 
-BLOCKED_WORDS = frozenset({"suicid","weapon"})
+BLOCKED_WORDS = frozenset({"suicide", "weapon"})
 FALLBACK = "I can't help you with that"
 
 class ChatModel:

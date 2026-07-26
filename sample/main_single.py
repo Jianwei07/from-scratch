@@ -28,12 +28,17 @@ MAX_BLOCKED_LENGTH = max(map(len, BLOCKED_TERMS))
 SAFE_REPLY = "I can't help with that. Please ask a trusted adult."
 
 
+# def is_safe(text:str) -> bool:
+#     words = set(re.findall(r"[a-z]+", text.casefold()))
+#     return words.isdisjoint(BLOCKED_WORDS)
+
+
 def is_safe(text: str) -> bool:
     """Detect exact blocked terms, including terms split by spaces."""
     words = re.findall(r"[a-z]+", text.casefold())
 
     # ponytail: heuristic filter; use moderation when semantic safety is required.
-    for start in range(len(words)):
+    for start in range(len(words)): 
         candidate = ""
         for word in words[start:]:
             candidate += word
