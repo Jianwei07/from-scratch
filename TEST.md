@@ -1,4 +1,3 @@
 ## on root
 
-src/.venv/bin/python -m unittest -v test_case.py
-sample/.venv/bin/python -m unittest -v test_case.py
+CHAT_TARGETS=src_v2 uv run --project src_v2 python -m unittest -v test_case.ChatTests

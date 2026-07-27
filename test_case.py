@@ -1,4 +1,5 @@
 import importlib
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -47,7 +48,10 @@ def load_target(folder: str) -> SimpleNamespace:
     )
 
 
-TARGETS = (load_target("src"), load_target("sample"))
+TARGETS = tuple(
+    load_target(folder)
+    for folder in os.environ.get("CHAT_TARGETS", "src,sample").split(",")
+)
 HISTORY_TARGET = load_target("sample_wif_store")
 
 
@@ -110,9 +114,7 @@ class ConversationHistoryTests(unittest.IsolatedAsyncioTestCase):
             target.ConversationStore(),
         )
 
-        first = await service.respond(
-            target.ChatRequest(message="Hello", age=10)
-        )
+        first = await service.respond(target.ChatRequest(message="Hello", age=10))
         second = await service.respond(
             target.ChatRequest(
                 message="Tell me more",

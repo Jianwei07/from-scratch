@@ -1,15 +1,15 @@
-from typing import Annotated, Literal
+from typing import Annotated
 
-from pydantic import BaseModel, Field, StringConstraints
+from pydantic import BaseModel, StringConstraints
 
 NonBlank = Annotated[
-    str,
-    StringConstraints(strip_whitespace=True,min_length=1,max_length=200)
+    str, StringConstraints(strip_whitespace=True, min_length=1, max_length=1000)
 ]
+
 
 class ChatRequest(BaseModel):
     message: NonBlank
-    age: int = Field(ge=8,le=15)
+
 
 class ChatResponse(BaseModel):
     response: NonBlank
