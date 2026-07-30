@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, StringConstraints
 
 NonBlank = Annotated[
     str,
-    StringConstraints(strip_whitespace=True,min_length=1,max_length=500)
+    StringConstraints(strip_whitespace=True, min_length=1, max_length=500)
 ]
 
 class ChatRequest(BaseModel):
