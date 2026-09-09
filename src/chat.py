@@ -15,6 +15,10 @@ class ChatModel:
 #     words = re.sub(r"[^a-z]", "",text.casefold())
 #     return not any(term in words for term in BLOCKED)
 
+# def is_safe(text:str) -> bool: ## this is good, isdisjoint is symmetric but other way, we dont need to convert words to set
+#     words = re.findall(r"[a-z]+",text.casefold())
+#     return BLOCKED.isdisjoint(words) 
+
 def is_safe(text: str) -> bool:
     words = re.findall(r"[a-z]+", text.casefold())
 

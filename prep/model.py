@@ -7,7 +7,6 @@ NonBlank = Annotated[
     str,
     StringConstraints(strip_whitespace=True,min_length=1,max_length=500)
 ]
-
 class ChatRequest(BaseModel):
     message: NonBlank
     age: int = Field(ge=5,le=15)
